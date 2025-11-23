@@ -25,22 +25,6 @@ int main() {
         g[v].push_back(u);
     }
 
-    vector<int> dist(n, -1);
-    vector<int> q;
-
-    q.emplace_back(0);
-    dist[0] = 0;
-
-    for(int i = 0; i < (int)q.size(); i++) {
-        int u = q[i];
-        for(int v : g[u]) {
-            if(dist[v] == -1) {
-                dist[v] = dist[u] + 1;
-                q.emplace_back(v);
-            }
-        }
-    }
-
     vector<int> best(n, -1), secondBest(n, -1);
     auto Update = [&](int u, int val) {
         if(best[u] == -1) {
