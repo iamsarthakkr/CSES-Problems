@@ -10,6 +10,8 @@ template <typename T> inline bool cmax(T &a, const T &b) { return b > a ? a = b,
 #define debug(...) ((void)0)
 #endif
 
+/*
+// dp
 int main() {
     ios::sync_with_stdio(false), cin.tie(nullptr), cout << setprecision(12) << fixed;
 
@@ -44,6 +46,34 @@ int main() {
     }
 
     cout << *max_element(dp.begin(), dp.end()) << '\n';
+
+    return 0;
+}
+*/
+
+// greedy
+int main() {
+    ios::sync_with_stdio(false), cin.tie(nullptr), cout << setprecision(12) << fixed;
+
+    int n;
+    cin >> n;
+    vector<int> l(n), r(n);
+    for(int i = 0; i < n; i++) cin >> l[i] >> r[i];
+
+    vector<int> order(n);
+    iota(order.begin(), order.end(), 0);
+    sort(order.begin(), order.end(), [&](int i, int j) { return r[i] < r[j]; });
+
+    int last = -1;
+    int ans = 0;
+    for(int i : order) {
+        if(l[i] >= last) {
+            last = r[i];
+            ans++;
+        }
+    }
+
+    cout << ans << '\n';
 
     return 0;
 }
